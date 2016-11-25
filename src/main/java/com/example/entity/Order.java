@@ -9,10 +9,20 @@ import java.sql.Timestamp;
  */
 public class Order {
     private int id;
-    private int user_id;
+    private int userid;
     private double totalPrice;
     private Timestamp time;
     private int state;
+    private String address;
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+
 
     public int getState() {
         return state;
@@ -26,8 +36,8 @@ public class Order {
         return id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserid() {
+        return userid;
     }
 
     public double getTotalPrice() {
@@ -42,8 +52,8 @@ public class Order {
         this.id = id;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
     public void setTotalPrice(double totalPrice) {

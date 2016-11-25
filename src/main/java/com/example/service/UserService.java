@@ -5,6 +5,7 @@ package com.example.service;
  */
 
 import com.example.entity.UserEntity;
+import net.sf.json.JSONObject;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface UserService {
     UserEntity findUserById(int id);
 
     List<UserEntity> getAll();
+
+    int login(JSONObject openid);
 }

@@ -12,18 +12,18 @@ import java.util.List;
  */
 @Repository
 public interface ProductDAO {
-    @Insert("INSERT INTO product(name,price) VALUES(#{name},#{price})")
+    @Insert("INSERT INTO product(tittle,price) VALUES(#{tittle},#{price})")
     @Options(useGeneratedKeys = true, keyProperty = "id")  // 将自动生成的主键重新设置到实体中，便于业务逻辑处理
     void insertProduct(Product product);
 
     @Select("SELECT * FROM product WHERE id = #{id}")
     @ResultType(Product.class)
-    UserEntity findProductById(@Param("id") int id);
+    Product findProductById(@Param("id") int id);
 
     @Delete("delete from product where id=#{id}")
     void deleteProduct(@Param("id") int id);
 
-    @Update( {"update product set name=#{name},price=#{price}",
+    @Update( {"update product set name=#{tittle},price=#{price}",
             "where id=#{id}" })
     void updateProduct(Product product);
 

@@ -1,5 +1,6 @@
 package com.example.dao;
 
+
 import com.example.entity.UserEntity;
 import org.apache.ibatis.annotations.*;
 import org.springframework.data.repository.query.Param;
@@ -33,9 +34,16 @@ public interface UserDAO {
     @Delete("delete from user where id=#{id}")
     void deleteUser(@Param("id") int id);
 
-    @Update( {"update person set username=#{username},phone=#{phone},password=#{password}",
+    @Update( {"update user set username=#{username},phone=#{phone},password=#{password}",
             "where id=#{id}" })
     void updateUser(UserEntity userEntity);
 
+    @Select("SELECT * FROM user WHERE openid = #{openid}")
+    @ResultType(UserEntity.class)
+    UserEntity findOrderByopenId(@Param("openid") String openid);
+
+    @Insert("INSERT INTO user(openid,nickname) VALUES(#{openid},#{nickname})")
+    @Options(useGeneratedKeys = true, keyProperty = "id")  // 将自动生成的主键重新设置到实体中，便于业务逻辑处理
+    void loginUser(UserEntity userEntity);
 
 }

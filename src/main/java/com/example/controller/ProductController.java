@@ -25,8 +25,13 @@ public class ProductController {
     @RequestMapping(method = RequestMethod.GET)
     public HttpEntity showAllProducts() {
         List<Product> productList=productService.getAll();
-
         return new ResponseEntity<>(productList, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET,value = "/{id}")
+    public HttpEntity getProduct(@PathVariable("id") Integer id) {
+        Product product=productService.findUserById(id);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
 }

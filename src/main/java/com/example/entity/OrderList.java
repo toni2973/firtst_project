@@ -1,31 +1,63 @@
 package com.example.entity;
 
-import sun.plugin.javascript.navig.Array;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by hhy on 11/20/16.
  */
 public class OrderList {
-    private Order order;
+    private int userid;
+    private int productid;
+    private String address;
+    private int num;
+    private int totalPrice;
+    private String openid;
 
-    public Order getOrder() {
-        return order;
+    public String getOpenid() {
+        return openid;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 
-    public ArrayList<OrderDetail> getOrderDetailList() {
-        return orderDetailList;
+
+
+    public int getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setOrderDetailList(ArrayList<OrderDetail> orderDetailList) {
-        this.orderDetailList = orderDetailList;
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
-    private ArrayList<OrderDetail> orderDetailList;
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public int getProductid() {
+        return productid;
+    }
+
+    public void setProductid(int productid) {
+        this.productid = productid;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
 }

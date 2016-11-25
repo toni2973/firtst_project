@@ -2,6 +2,8 @@ package com.example.service;
 
 import com.example.entity.Order;
 import com.example.entity.OrderDetail;
+import com.example.entity.OrderList;
+import net.sf.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +13,13 @@ import java.util.List;
  */
 public interface OrderService {
 
-    boolean createOrder(Order order, ArrayList<OrderDetail> orderDetailList);
+
 
     Order findById(int id);
+
+    int createOrder(OrderList orderList);
+
+    JSONObject prePaidOrder(int id);
+
 
 }
