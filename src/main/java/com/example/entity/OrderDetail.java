@@ -7,9 +7,39 @@ public class OrderDetail {
     private int id;
     private int product_id;
     private int quantity;
+    private String title;
+    private String pic;
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    private double price;
 
     private int order_id;
+
+    public OrderDetail() {
+    }
 
     public int getId() {
         return id;

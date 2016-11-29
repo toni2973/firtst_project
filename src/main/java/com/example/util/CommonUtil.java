@@ -28,7 +28,7 @@ import org.jdom.input.SAXBuilder;
  */
 public class CommonUtil {
 
-    public static JSONObject getxml(int orderid,double totalPrice,String url,String openid,String desc) throws Exception {
+    public static JSONObject getxml(int orderid, double totalPrice, String url, String openid, String desc, Long time) throws Exception {
 
         //获取prepayid
         Map<String, String> map = new HashMap<String, String>();
@@ -43,7 +43,7 @@ public class CommonUtil {
 
 //            oauthService.shareFactory(request);
         String appid = "wxe1b0f22089fadce1";
-        long timestamp = System.currentTimeMillis() / 1000;
+        long timestamp = time;
         map.put("appid", appid);
         map.put("mch_id", "1324493901");
         map.put("nonce_str", nonceStr);

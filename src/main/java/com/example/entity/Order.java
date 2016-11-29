@@ -1,9 +1,6 @@
 package com.example.entity;
 
 
-import java.sql.Timestamp;
-
-
 /**
  * Created by hhy on 11/19/16.
  */
@@ -11,7 +8,7 @@ public class Order {
     private int id;
     private int userid;
     private double totalPrice;
-    private Timestamp time;
+    private Long order_time;
     private int state;
     private String address;
     public String getAddress() {
@@ -44,8 +41,8 @@ public class Order {
         return totalPrice;
     }
 
-    public Timestamp getTime() {
-        return time;
+    public Long getOrder_time() {
+        return order_time;
     }
 
     public void setId(int id) {
@@ -60,8 +57,8 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public void setTime(Timestamp time) {
-        this.time = time;
+    public void setOrder_time(Long order_time) {
+        this.order_time = order_time;
     }
 
 

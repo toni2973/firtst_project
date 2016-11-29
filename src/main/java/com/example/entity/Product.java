@@ -5,21 +5,15 @@ package com.example.entity;
  */
 public class Product {
     private int id;
-    private String tittle;
+    private String title;
     private double price;
     private String description;
     private String place;
     private String pic;
     private boolean freemail;
-    private String address;
 
-    public String getAddress() {
-        return address;
-    }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+
 
     public boolean isFreemail() {
         return freemail;
@@ -59,12 +53,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public double getPrice() {

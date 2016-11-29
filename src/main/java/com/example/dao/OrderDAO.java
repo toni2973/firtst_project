@@ -11,7 +11,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderDAO {
 
-    @Insert("INSERT INTO orders(userid,totalPrice,order_time,state,address)VALUES(#{userid},#{totalPrice},#{time},#{state},#{address})")
+
+    @Insert("INSERT INTO orders(userid,totalPrice,order_time,state,address)VALUES(#{userid},#{totalPrice},#{order_time},#{state},#{address})")
     @Options(useGeneratedKeys = true, keyProperty = "id")  // 将自动生成的主键重新设置到实体中，便于业务逻辑处理
     void insertOrder(Order order);
 
@@ -24,7 +25,7 @@ public interface OrderDAO {
     @Delete("delete from orders where id=#{id}")
     void deleteOrder(@Param("id") int id);
 
-    @Update( {"update orders set user_id=#{user_id},totalPrice=#{totalPrice},order_time=#{time},state=#{state}",
+    @Update( {"update orders set user_id=#{user_id},totalPrice=#{totalPrice},order_time=#{order_time},state=#{state}",
             "where id=#{id}" })
     void updateOrder(Order order);
 

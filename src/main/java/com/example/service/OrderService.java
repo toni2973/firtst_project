@@ -21,5 +21,5 @@ public interface OrderService {
 
     JSONObject prePaidOrder(int id);
 
-
+    JSONObject getOrder(int id);
 }

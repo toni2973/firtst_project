@@ -59,6 +59,22 @@ public class OrderController {
         Order order=orderService.findById(id);
         return new ResponseEntity(order,HttpStatus.OK);
     }
+    @RequestMapping(method = RequestMethod.GET,value = "/get")
+    public HttpEntity getOrderList(@RequestParam(value="id",required = true) int id) {
+//        @RequestParam(value = "name", required = true) String name,
+//        @RequestParam(value = "pwd", required = true) String pwd)
+//      public HttpEntity createOrder(@RequestBody Map<String,Object> orderMap) {
+//
+//        Order order= (Order) orderMap.get("order");
+//        List<OrderDetail> orderDetailList= (List<OrderDetail>) orderMap.get("orderDetailList");
+
+
+
+        JSONObject json=orderService.getOrder(id);
+
+        return new ResponseEntity(json,HttpStatus.OK);
+    }
+
     @RequestMapping(method = RequestMethod.POST,value = "/pay/{id}")
     public HttpEntity payOrder(@PathVariable("id")  int id) {
 //        @RequestParam(value = "name", required = true) String name,
@@ -79,7 +95,7 @@ public class OrderController {
     @RequestMapping(value="/pay/wexinnotify/test.do")
 
     public String weixinNotify(HttpServletRequest request, HttpServletResponse response){
-        System.out.println("fdasfasdfasdfsad");
+
         String out_trade_no=null;
         String return_code =null;
 //

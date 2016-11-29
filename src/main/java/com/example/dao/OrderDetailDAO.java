@@ -14,7 +14,8 @@ import java.util.List;
 @Repository
 public interface OrderDetailDAO {
 
-    @Insert("INSERT INTO orderDetail(product_id,quantity,order_id) VALUES(#{product_id},#{quantity},#{order_id})")
+    @Insert("INSERT INTO orderDetail(product_id,quantity,order_id,pic,price,title)" +
+            " VALUES(#{product_id},#{quantity},#{order_id},#{pic},#{price},#{title})")
     @Options(useGeneratedKeys = true, keyProperty = "id")  // 将自动生成的主键重新设置到实体中，便于业务逻辑处理
     void insertOrderDetail(OrderDetail orderDetail);
 
@@ -30,14 +31,15 @@ public interface OrderDetailDAO {
     @Delete("delete from orderDetail where id=#{id}")
     void deleteOrderDetail(@Param("id") int id);
 
-    @Update( {"update orderDetail set product_id=#{product_id},quantity=#{quantity}",
+    @Update( {"update orderDetail set product_id=#{product_id},quantity=#{quantity},pic=#{pic},title=#{title},price=#{price}",
             "where id=#{id}" })
     void updateOrderDetail(OrderDetail OrderDetail);
+
     @Select("<script>"+
-            "insert into orderDetail(product_id, quantity, order_id) "
+            "insert into orderDetail(product_id, quantity, order_id,price,pic,title) "
             + "values"
             + "<foreach collection =\"orderDetailList\" item=\"item\" index= \"index\" separator =\",\"> "
-            + "(#{item.product_id},#{item.quantity},#{order_id}) "
+            + "(#{item.product_id},#{item.quantity},#{order_id},#{item.price},#{item.pic}，#{item.title}) "
             + "</foreach> "
             + "</script>")
     @Options(useGeneratedKeys = true, keyProperty = "id")

@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserEntity findUserById(int id) {
-        return userDAO.findUserById(id);
+        return userDAO.findById(id);
     }
 
     @Override
@@ -58,12 +58,12 @@ public class UserServiceImpl implements UserService {
     public int login(JSONObject json) {
         String openid=json.getString("openid");
         String nickname=json.getString("nickname");
-        UserEntity user=userDAO.findOrderByopenId(openid);
+        UserEntity user=userDAO.findByopenId(openid);
         if (user==null){
             user=new UserEntity();
             user.setOpenid(openid);
             user.setNickname(nickname);
-            userDAO.loginUser(user);
+            userDAO.login(user);
         }
         return user.getId();
     }

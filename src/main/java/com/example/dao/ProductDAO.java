@@ -12,7 +12,15 @@ import java.util.List;
  */
 @Repository
 public interface ProductDAO {
-    @Insert("INSERT INTO product(tittle,price) VALUES(#{tittle},#{price})")
+//    private int id;
+//    private String title;
+//    private double price;
+//    private String description;
+//    private String place;
+//    private String pic;
+//    private boolean freemail;
+//    private String address;
+    @Insert("INSERT INTO product(title,price,pic,description,place,freemail) VALUES(#{title},#{price},#{pic},#{description},#{place},#{freemail})")
     @Options(useGeneratedKeys = true, keyProperty = "id")  // 将自动生成的主键重新设置到实体中，便于业务逻辑处理
     void insertProduct(Product product);
 
@@ -23,7 +31,7 @@ public interface ProductDAO {
     @Delete("delete from product where id=#{id}")
     void deleteProduct(@Param("id") int id);
 
-    @Update( {"update product set name=#{tittle},price=#{price}",
+    @Update( {"update product set name=#{title},price=#{price}",
             "where id=#{id}" })
     void updateProduct(Product product);
 

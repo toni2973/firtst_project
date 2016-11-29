@@ -16,7 +16,7 @@ import java.util.List;
 public interface UserDAO {
 
     // 插入一行新数据
-    @Insert("INSERT INTO user(username,phone,password) VALUES(#{username},#{phone},#{password})")
+    @Insert("INSERT INTO user(username,phone,password,address) VALUES(#{username},#{phone},#{password},#{address})")
     @Options(useGeneratedKeys = true, keyProperty = "id")  // 将自动生成的主键重新设置到实体中，便于业务逻辑处理
     void insertUser(UserEntity userEntity);
 
@@ -24,7 +24,7 @@ public interface UserDAO {
     // 根据id查询用户
     @Select("SELECT * FROM user WHERE id = #{id} Limit 1")
     @ResultType(UserEntity.class)
-    UserEntity findUserById(@Param("id") int id);
+    UserEntity findById(@Param("id") int id);
 
     @Select("SELECT * FROM user Limit 1,5")
     @ResultType(List.class)
@@ -34,16 +34,16 @@ public interface UserDAO {
     @Delete("delete from user where id=#{id}")
     void deleteUser(@Param("id") int id);
 
-    @Update( {"update user set username=#{username},phone=#{phone},password=#{password}",
+    @Update( {"update user set username=#{username},phone=#{phone},password=#{password},address=#{address}",
             "where id=#{id}" })
-    void updateUser(UserEntity userEntity);
+    void update(UserEntity userEntity);
 
     @Select("SELECT * FROM user WHERE openid = #{openid}")
     @ResultType(UserEntity.class)
-    UserEntity findOrderByopenId(@Param("openid") String openid);
+    UserEntity findByopenId(@Param("openid") String openid);
 
     @Insert("INSERT INTO user(openid,nickname) VALUES(#{openid},#{nickname})")
     @Options(useGeneratedKeys = true, keyProperty = "id")  // 将自动生成的主键重新设置到实体中，便于业务逻辑处理
-    void loginUser(UserEntity userEntity);
+    void login(UserEntity userEntity);
 
 }
