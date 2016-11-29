@@ -22,4 +22,6 @@ public interface OrderService {
     JSONObject prePaidOrder(int id);
 
     JSONObject getOrder(int id);
+
+    void paid(int id);
 }

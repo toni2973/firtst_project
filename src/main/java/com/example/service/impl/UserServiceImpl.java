@@ -17,13 +17,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDAO userDAO;
 
-    // 依赖注入
-//    @Autowired
-//    public UserServiceImpl(UserDAO userDAO) {
-//        this.userDAO = userDAO;
-//    }
-
-
     /**
      *  创建新用户
      * @param userEntity
@@ -67,5 +60,5 @@ public class UserServiceImpl implements UserService {
         }
         return user.getId();
     }
-    // .......
+
 }

@@ -22,12 +22,11 @@ public class Order {
 
 
     public int getState() {
+
         return state;
     }
 
-    public void setState(int state) {
-        this.state = state;
-    }
+    public void setState(int state) {this.state = state;}
 
     public int getId() {
         return id;

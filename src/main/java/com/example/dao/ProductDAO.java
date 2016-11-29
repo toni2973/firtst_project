@@ -12,16 +12,9 @@ import java.util.List;
  */
 @Repository
 public interface ProductDAO {
-//    private int id;
-//    private String title;
-//    private double price;
-//    private String description;
-//    private String place;
-//    private String pic;
-//    private boolean freemail;
-//    private String address;
+
     @Insert("INSERT INTO product(title,price,pic,description,place,freemail) VALUES(#{title},#{price},#{pic},#{description},#{place},#{freemail})")
-    @Options(useGeneratedKeys = true, keyProperty = "id")  // 将自动生成的主键重新设置到实体中，便于业务逻辑处理
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     void insertProduct(Product product);
 
     @Select("SELECT * FROM product WHERE id = #{id}")

@@ -17,7 +17,7 @@ public interface UserDAO {
 
     // 插入一行新数据
     @Insert("INSERT INTO user(username,phone,password,address) VALUES(#{username},#{phone},#{password},#{address})")
-    @Options(useGeneratedKeys = true, keyProperty = "id")  // 将自动生成的主键重新设置到实体中，便于业务逻辑处理
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     void insertUser(UserEntity userEntity);
 
 
@@ -43,7 +43,7 @@ public interface UserDAO {
     UserEntity findByopenId(@Param("openid") String openid);
 
     @Insert("INSERT INTO user(openid,nickname) VALUES(#{openid},#{nickname})")
-    @Options(useGeneratedKeys = true, keyProperty = "id")  // 将自动生成的主键重新设置到实体中，便于业务逻辑处理
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     void login(UserEntity userEntity);
 
 }

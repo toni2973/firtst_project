@@ -60,8 +60,6 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public JSONObject prePaidOrder(int id) {
 
-        orderDAO.paidOrder(id);
-
         String url="http://hya.s1.natapp.cc/api/orders/pay/wexinnotify/test.do";
         Order order=findById(id);
         UserEntity user=userDAO.findById(order.getUserid());
@@ -82,24 +80,25 @@ public class OrderServiceImpl implements OrderService{
     public JSONObject getOrder(int id) {
         Order order=orderDAO.findOrderById(id);
         List<OrderDetail> orderDetailList=orderDetailDAO.findOrderDetailByOrderId(id);
-//        List<Map> odList=new ArrayList<>();
+
         JSONObject json=new JSONObject();
         order.setOrder_time(order.getOrder_time()*1000);
         json.put("order",order);
-//        for (OrderDetail orderDetail:orderDetailList){
-//            Map<String ,String >od=new HashMap<>();
-//            od.put("totalPrice",orderDetail.get);
-//        }
         json.put("orderDetailList",orderDetailList);
+
         UserEntity user=userDAO.findById(order.getUserid());
         JSONObject userJSON=new JSONObject();
         userJSON.put("nickname",user.getNickname());
         json.put("user",userJSON);
 
         return json;
-
-
     }
+
+    @Override
+    public void paid(int id) {
+        orderDAO.paidOrder(id);
+    }
+
 
     private String getProduct(int id){
         List<OrderDetail> orderlist=orderDetailDAO.findOrderDetailByOrderId(id);

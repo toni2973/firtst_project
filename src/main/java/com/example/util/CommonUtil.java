@@ -48,29 +48,29 @@ public class CommonUtil {
         map.put("mch_id", "1324493901");
         map.put("nonce_str", nonceStr);
         map.put("body", desc);
-        map.put("out_trade_no", "hya"+orderid );
+        map.put("out_trade_no", "hya" + orderid);
         map.put("total_fee", "1");
         map.put("spbill_create_ip", ip);
         map.put("notify_url", url);
         map.put("trade_type", "JSAPI");
         map.put("openid", openid);
         String paySign = null;
-        String secret="QMNERAJTMSGIZZIBBHYQEJISWCSRSGED";
+        String secret = "QMNERAJTMSGIZZIBBHYQEJISWCSRSGED";
         try {
             paySign = getPayCustomSign(map, secret);
         } catch (Exception e) {
             e.printStackTrace();
         }
         map.put("sign", paySign);
-        String xml=    CommonUtil.ArrayToXml(map);
-        String s= CommonUtil.httpsPost("https://api.mch.weixin.qq.com/pay/unifiedorder",xml);
-        JSONObject result=CommonUtil.xml2JSON(s);
+        String xml = CommonUtil.ArrayToXml(map);
+        String s = CommonUtil.httpsPost("https://api.mch.weixin.qq.com/pay/unifiedorder", xml);
+        JSONObject result = CommonUtil.xml2JSON(s);
 
         JSONObject json = new JSONObject();
         if (result.get("result_code").equals("SUCCESS")) {
             //封装h5页面调用参数
             Map<String, String> signMap = new HashMap<String, String>();
-            String prepayid=    result.getString("prepay_id");
+            String prepayid = result.getString("prepay_id");
             signMap.put("appId", appid);
             signMap.put("timeStamp", timestamp + "");
             signMap.put("package", "prepay_id=" + prepayid);
@@ -84,15 +84,15 @@ public class CommonUtil {
             json.put("signType", "MD5");
             String paySign2 = getPayCustomSign(signMap, secret);
             json.put("paySign", paySign2);
-            json.put("ok",true);
-        }else{
-            json.put("error",result.getString("err_code_des"));
+            json.put("ok", true);
+        } else {
+            json.put("error", result.getString("err_code_des"));
         }
         return json;
     }
 
     @SuppressWarnings("unchecked")
-    public static  JSONObject xml2JSON(String xml) {
+    public static JSONObject xml2JSON(String xml) {
         JSONObject obj = new JSONObject();
         try {
             InputStream is = new ByteArrayInputStream(xml.getBytes("utf-8"));
@@ -113,31 +113,31 @@ public class CommonUtil {
     }
 
 
-
     /**
      * 一个迭代方法
      *
      * @param element
-     *            : org.jdom.Element
+     * : org.jdom.Element
      * @return java.util.Map 实例
      */
     @SuppressWarnings("unchecked")
 
     private static Logger log = Logger.getLogger(CommonUtil.class);
+
     public static JSONObject httpsRequestToJsonObject(String requestUrl, String requestMethod, String outputStr) {
         JSONObject jsonObject = null;
         try {
             StringBuffer buffer = httpsRequest(requestUrl, requestMethod);
             jsonObject = JSONObject.fromObject(buffer.toString());
         } catch (ConnectException ce) {
-            log.error("连接超时："+ce.getMessage());
+            log.error("连接超时：" + ce.getMessage());
         } catch (Exception e) {
-            log.error("https请求异常："+e.getMessage());
+            log.error("https请求异常：" + e.getMessage());
         }
         return jsonObject;
     }
 
-    public static String httpsPost(String requestUrl,String data) throws IOException {
+    public static String httpsPost(String requestUrl, String data) throws IOException {
 
         URL url = new URL(requestUrl);
         HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
@@ -150,11 +150,11 @@ public class CommonUtil {
         out.writeBytes(data); //写入请求的字符串
         out.flush();
         out.close();
-        String result=null;
-        if(connection.getResponseCode() ==200) {
+        String result = null;
+        if (connection.getResponseCode() == 200) {
             System.out.println("yes++");
             //请求返回的数据
-            InputStream in=connection.getInputStream();
+            InputStream in = connection.getInputStream();
 
             try {
                 byte[] data1 = new byte[in.available()];
@@ -167,12 +167,13 @@ public class CommonUtil {
                 e1.printStackTrace();
             }
         } else {
-            result="error";
+            result = "error";
         }
 
 
         return result;
     }
+
     private static StringBuffer httpsRequest(String requestUrl, String requestMethod)
             throws NoSuchAlgorithmException, NoSuchProviderException, KeyManagementException, MalformedURLException,
             IOException, ProtocolException, UnsupportedEncodingException {
@@ -209,6 +210,7 @@ public class CommonUtil {
 //        logger.info(bizString);
         return MD5SignUtil.sign(bizString, key);
     }
+
     public static String FormatBizQueryParaMap(Map<String, String> paraMap,
                                                boolean urlencode) throws Exception {
 
@@ -250,6 +252,7 @@ public class CommonUtil {
         }
         return buff;
     }
+
     public static String ArrayToXml(Map<String, String> arr) {
         String xml = "<xml>";
 
@@ -268,6 +271,7 @@ public class CommonUtil {
         xml += "</xml>";
         return xml;
     }
+
     public static boolean IsNumeric(String str) {
         if (str.matches("\\d *")) {
             return true;
@@ -275,89 +279,4 @@ public class CommonUtil {
             return false;
         }
     }
-//    @SuppressWarnings("unchecked")
-//    public static  JSONObject xml2JSON(InputStream is) {
-//        JSONObject obj = new JSONObject();
-//        try {
-//            SAXReader sb = new SAXReader();
-//            Document doc = sb.read(is);
-//            Element root = doc.getRootElement();
-//            obj.put(root.getName(), iterateElement(root));
-//            return obj;
-//        } catch (Exception e) {
-//            log.error("传入XML后转换JSON出现错误===== Xml2JsonUtil-->xml2JSON============>>",e);
-//            return null;
-//        }
-//    }
-//
-//    /**
-//     * 一个迭代方法
-//     *
-//     * @param element
-//     *            : org.jdom.Element
-//     * @return java.util.Map 实例
-//     */
-//    @SuppressWarnings("unchecked")
-//    private static Map  iterateElement(Element element) {
-//        List jiedian = element.elements() ;
-//        Element et = null;
-//        Map obj = new HashMap();
-//        List list = null;
-//        for (int i = 0; i < jiedian.size(); i++) {
-//            list = new LinkedList();
-//            et = (Element) jiedian.get(i);
-//            if (et.getTextTrim().equals("")) {
-//                if (et.elements().size() == 0)
-//                    continue;
-//                if (obj.containsKey(et.getName())) {
-//                    list = (List) obj.get(et.getName());
-//                }
-//                list.add(iterateElement(et));
-//                obj.put(et.getName(), list);
-//            } else {
-//                if (obj.containsKey(et.getName())) {
-//                    list = (List) obj.get(et.getName());
-//                }
-//                list.add(et.getTextTrim());
-//                obj.put(et.getName(), list);
-//            }
-//        }
-//        return obj;
-//    }
 }
-
- /**
- * 获取用户的openId，并放入session
- * @param code 微信返回的code
- */
-//private void setOpenId(String code) {
-//        session.put("code", code);
-//        String oauth_url = Constants.oauth_url.replace("APPID", Constants.appid).replace("SECRET", Constants.appsecret).replace("CODE", String.valueOf(session.get("code")));
-//        log.info("oauth_url:"+oauth_url);
-//        JSONObject jsonObject = CommonUtil.httpsRequestToJsonObject(oauth_url, "POST", null);
-//        log.info("jsonObject:"+jsonObject);
-//        Object errorCode = jsonObject.get("errcode");
-//        if(errorCode != null) {
-//        log.info("code不合法");
-//        }else{
-//        String openId = jsonObject.getString("openid");
-//        log.info("openId:"+openId);
-//        session.put("openId", openId);
-//        }
-//        }
-//}
-
-
-//        oauth_url返回的格式是：
-//        　　{
-//        　　　"access_token":"ACCESS_TOKEN",
-//        　　　"expires_in":,
-//        "refresh_token":"REFRESH_TOKEN",
-//        "openid":"OPENID", "scope":"SCOPE",
-//        "unionid": "o_bmasdasdsad_sgVthMZOPfL"
-//        }
-//        Code无效时：
-//        　　{
-//        　　 "errcode":
-//        　　　,"errmsg":"invalid code"
-//        }

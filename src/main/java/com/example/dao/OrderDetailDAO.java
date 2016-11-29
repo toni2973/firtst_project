@@ -16,7 +16,7 @@ public interface OrderDetailDAO {
 
     @Insert("INSERT INTO orderDetail(product_id,quantity,order_id,pic,price,title)" +
             " VALUES(#{product_id},#{quantity},#{order_id},#{pic},#{price},#{title})")
-    @Options(useGeneratedKeys = true, keyProperty = "id")  // 将自动生成的主键重新设置到实体中，便于业务逻辑处理
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     void insertOrderDetail(OrderDetail orderDetail);
 
     @Select("SELECT * FROM orderDetail WHERE id = #{id}")

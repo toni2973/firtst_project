@@ -33,26 +33,9 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public HttpEntity getUserById(@PathVariable("id") Integer id) {
         UserEntity userEntity = userService.findUserById(id);
-//        JSONObject json = JSONObject.fromObject(userEntity);
+
         return new ResponseEntity<>(userEntity, HttpStatus.OK);
     }
-//    @RequestMapping(method = RequestMethod.POST,value = "/add")
-//    public HttpEntity add(){
-//        UserEntity userEntity=new UserEntity();
-//        userEntity.setId(0);
-//        userEntity.setPassword("123456");
-//        userEntity.setPhone("12345678902");
-//        userEntity.setUsername("admin");
-//        userService.createUser(userEntity);
-//        return new ResponseEntity(HttpStatus.CREATED);
-//    }
-
-//    @RequestMapping(method = RequestMethod.GET)
-//    public HttpEntity getAll() {
-//        List<UserEntity> userlist = userService.getAll();
-//
-//        return new ResponseEntity<>(userlist, HttpStatus.OK);
-//    }
 
     /**
      * 创建用户
