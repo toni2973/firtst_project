@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.UserDAO">
+
+
+    <insert id="insertUser"  parameterType="com.example.entity.UserEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user(username,phone,password,address) VALUES(#{username},#{phone},#{password},#{address})
+    </insert>
+    <select id="getAll" resultType="com.example.entity.UserEntity">
+        SELECT * FROM user Limit 1,5
+    </select>
+    <select id="findById" resultType="com.example.entity.UserEntity" parameterType="int">
+        SELECT * FROM user WHERE id = #{id} Limit 1
+    </select>
+    <select id="findByopenId" resultType="com.example.entity.UserEntity" parameterType="java.lang.String">
+        SELECT * FROM user WHERE openid = #{openid}
+    </select>
+    <update id="update" parameterType="com.example.entity.UserEntity">
+        update user set username=#{username},phone=#{phone},password=#{password},address=#{address} where id=#{id}
+    </update>
+    <delete id="deleteUser" parameterType="int">
+        delete from user where id=#{id}
+    </delete>
+    <insert id="login" parameterType="com.example.entity.UserEntity" useGeneratedKeys = "true" keyProperty="id">
+        INSERT INTO user(openid,nickname) VALUES(#{openid},#{nickname})
+    </insert>
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.ProductDAO">
+
+
+    <insert id="insertProduct"  parameterType="com.example.entity.Product" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO product(title,price,pic,description,place,freemail) VALUES(#{title},#{price},#{pic},#{description},#{place},#{freemail})
+    </insert>
+
+    <select id="findProductById" resultType="com.example.entity.Product" parameterType="int">
+        SELECT * FROM product WHERE id = #{id}
+    </select>
+
+    <update id="update" parameterType="com.example.entity.Product">
+       update product set name=#{title},price=#{price} where id=#{id}
+    </update>
+
+    <delete id="deleteProduct" parameterType="int">
+        delete from product where id=#{id}
+    </delete>
+
+    <select id="getAll" resultType="com.example.entity.Product" >
+        SELECT * FROM product
+    </select>
+</mapper>

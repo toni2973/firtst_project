@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.OrderDetailDAO">
+
+
+    <insert id="insertOrderDetail"  parameterType="com.example.entity.OrderDetail" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO orderDetail(product_id,quantity,order_id,pic,price,title)VALUES(#{product_id},#{quantity},#{order_id},#{pic},#{price},#{title})
+    </insert>
+
+    <select id="findOrderDetailById" resultType="com.example.entity.OrderDetail" parameterType="int">
+        SELECT * FROM orderDetail WHERE id = #{id}
+    </select>
+
+    <select id="findOrderDetailByOrderId" parameterType="int" resultType="com.example.entity.OrderDetail" >
+        SELECT * FROM orderDetail WHERE order_id = #{id}
+    </select>
+
+    <delete id="deleteOrderDetail" parameterType="int">
+        DELETE FROM orderDetail WHERE id=#{id}
+    </delete>
+    <update id="updateOrderDetail" parameterType="com.example.entity.OrderDetail">
+        update orderDetail set product_id=#{product_id},quantity=#{quantity},pic=#{pic},title=#{title},price=#{price}
+            where id=#{id}
+    </update>
+
+
+    <insert id="insertOrderDetailList" useGeneratedKeys="true" parameterType="com.example.entity.OrderDetail">
+
+        insert intoorderDetail(product_id, quantity, order_id,price,pic,title)
+        values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.product_id},#{item.quantity},#{order_id},#{item.price},#{item.pic}，#{item.title})
+        </foreach>
+    </insert>
+</mapper>

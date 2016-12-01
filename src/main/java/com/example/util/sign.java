@@ -1,4 +1,4 @@
-package com.example;
+package com.example.util;
 
 /**
  * Created by hhy on 16-11-24.
